@@ -21,7 +21,7 @@
             }
         </div>
         <div class="col-md-4"></div>
-        <div class="col-md-4">
+        <form method="post" class="col-md-4">
             <h2>Редактор свойства: </h2>
             <p>Целочисленные свойства: </p>
             @foreach (var e in prop)
@@ -30,7 +30,7 @@
                 {
                     <p>
                         <lable>@e.Name: </lable>
-                        <input type="number" value="@e.GetValue(Model.obj)">
+                        <input type="number" name="MyInt" value="@e.GetValue(Model.obj)">
                     </p>
                 }
             }
@@ -41,10 +41,11 @@
                 {
                     <p>
                         <lable>@e.Name: </lable>
-                        <input type="text" value="@e.GetValue(Model.obj)">
+                        <input type="text" name="MyString" value="@e.GetValue(Model.obj)">
                     </p>
                 }
             }
-        </div>
+            <input type="submit" value="Send">
+        </form>
     }
 </div>
