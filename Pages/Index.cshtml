@@ -1,0 +1,50 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="container row">
+    @{
+        var type = Model.obj.GetType();
+        var prop = type.GetProperties();
+        <div class="col-md-4">
+            <h2>Данные объекта: </h2>
+            <p>Тип объекта: @Model.obj.GetType().Name</p>
+            <p>Публичные свойства и их значения объекта:</p>
+            @foreach (var e in prop)
+            {
+                <p>
+                    <lable>@e.Name: </lable>
+                    @e.GetValue(Model.obj)"
+                </p>
+            }
+        </div>
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <h2>Редактор свойства: </h2>
+            <p>Целочисленные свойства: </p>
+            @foreach (var e in prop)
+            {
+                @if (Type.Equals(e.PropertyType, typeof(int)))
+                {
+                    <p>
+                        <lable>@e.Name: </lable>
+                        <input type="number" value="@e.GetValue(Model.obj)">
+                    </p>
+                }
+            }
+            <p>Строковые свойства: </p>
+            @foreach (var e in prop)
+            {
+                @if (Type.Equals(e.PropertyType, typeof(string)))
+                {
+                    <p>
+                        <lable>@e.Name: </lable>
+                        <input type="text" value="@e.GetValue(Model.obj)">
+                    </p>
+                }
+            }
+        </div>
+    }
+</div>
