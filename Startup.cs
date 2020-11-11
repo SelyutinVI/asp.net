@@ -8,6 +8,9 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using WebApplication1.Interface;
+using WebApplication1.Object;
+using WebApplication1.Repository;
 
 namespace WebApplication1
 {
@@ -23,6 +26,8 @@ namespace WebApplication1
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddTransient<MyInterface, MyRepository>();
+
             services.AddRazorPages();
         }
 
