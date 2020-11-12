@@ -14,10 +14,7 @@ namespace WebApplication1.Repository
         private List<Type> types;
         public MyRepository()
         {
-            types = new List<Type>();
-            types.Add(typeof(int));
-            types.Add(typeof(string));
-            types.Add(typeof(double));
+            types = new List<Type>();           
         }
 
         private Dictionary<PropertyInfo, string> getProp(object obj, Type t)
@@ -33,25 +30,11 @@ namespace WebApplication1.Repository
                 }
             }
             return _values;
-        }
+        } //Функция получения свойств по типу
 
-        private void setProp(object obj, Dictionary<Type, Dictionary<PropertyInfo, string>> values) {
-            foreach (var t in values)
-                foreach (var p in t.Value)
-                {
-                    try
-                    {
-                        p.Key.SetValue(obj,Convert.ChangeType(p.Value,t.Key));
-                    }
-                    catch
-                    {
-                        
-                    }
-
-                }
-
-        }
-
+        public void SetTypes(List<Type> types) {
+            this.types = types;
+        } //Установка типов свойств
 
         public Dictionary<Type, Dictionary<PropertyInfo,string>> MyGetProperties(object obj)
         {
@@ -59,11 +42,23 @@ namespace WebApplication1.Repository
             foreach(Type t in types)
             result.Add(t, getProp(obj,t));
             return result;
-        }
+        } //Получение свойств объекта
 
         public void MySetProperties(object a, Dictionary<Type, Dictionary<PropertyInfo, string>> values)
         {
-            setProp(a,values);
-        }
+            foreach (var t in values)
+                foreach (var p in t.Value)
+                {
+                    try
+                    {
+                        p.Key.SetValue(a, Convert.ChangeType(p.Value, t.Key));
+                    }
+                    catch
+                    {
+
+                    }
+
+                }
+        } //Установка значений свойств
     }
 }

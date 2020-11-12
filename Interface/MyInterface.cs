@@ -10,6 +10,7 @@ namespace WebApplication1.Interface
 {
     public interface MyInterface
     {
+        public void SetTypes(List<Type> types);
         public Dictionary<Type, Dictionary<PropertyInfo,string>> MyGetProperties(object a);
         public void MySetProperties(object a, Dictionary<Type, Dictionary<PropertyInfo, string>> values);
     }

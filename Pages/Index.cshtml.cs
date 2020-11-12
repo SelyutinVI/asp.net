@@ -20,7 +20,10 @@ namespace WebApplication1.Pages
         public IndexModel(MyInterface _i)
         {
             _interface = _i;
-            _obj = new MyObject();
+            List<Type> types = new List<Type> { typeof(int), typeof(string) }; //определение типов свойств
+            _i.SetTypes(types);
+
+            _obj = new MyObject();            
             vm = new ViewModel();
             vm.Name = _obj.GetType().Name;
             vm.Properties = _interface.MyGetProperties(_obj);
